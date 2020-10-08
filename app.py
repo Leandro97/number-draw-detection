@@ -33,6 +33,7 @@ model, graph = init()
 
 from PIL import Image
 import base64
+
 #decoding an image from base64 into raw representation
 def convertImage(imgData1):
 	newData    = re.search(b'base64,(.*)',imgData1).group(1)
@@ -40,7 +41,7 @@ def convertImage(imgData1):
 	img = Image.frombytes("RGBA", (16, 16), newData)
 
 	with open("output.png", "wb") as fh:
-		fh.write(base64.decodebytes(newData))
+		fh.write(base64.standard_b64decode(newData))
 
 @app.route('/')
 def index():
